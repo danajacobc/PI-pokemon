@@ -4,7 +4,7 @@ const {Pokemon} = require("../db");
 
 const getPokeByName = async (req, res) => {
     try {
-        const { name } = req.query;
+        const { name } = req.query; 
         
         if(!name) return res.status(400).json({message: `Ingrese un nombre para la consulta.`});
         
