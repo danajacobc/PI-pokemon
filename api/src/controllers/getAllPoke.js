@@ -9,7 +9,7 @@ const getAllPoke = async (req, res) => {
         if(!data.results) return res.status(404).json({message: 'No se recibe la info de data.results'});
 
         const requests = allPokeUrls.map((url) => axios.get(url));
-        const responses = await Promise.all(requests); //el promise.all no resuelve las promesas en orden.
+        const responses = await Promise.all(requests); //el promise.all NO resuelve las promesas en orden.
 
         const allPoke = formatPokemonApi(responses);
 

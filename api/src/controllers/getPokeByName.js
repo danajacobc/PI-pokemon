@@ -1,6 +1,7 @@
 const axios = require("axios");
 const {formatSinglePoke} = require("../utils");
 const {Pokemon} = require("../db");
+const {Op} = require('sequelize');
 
 const getPokeByName = async (req, res) => {
     try {
