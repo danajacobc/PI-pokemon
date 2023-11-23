@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+/*Components*/
+import LandingPage from './components/Landing Page/LandingPage';
+import Home from './components/Home Page/Home';
 
-function App() {
+const App = () => {
 
   return (
     <div>
-      <h1>POKEMON!</h1>
+      <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/home" element={<Home />} />
+    </Routes>
     </div>
   )
 }
