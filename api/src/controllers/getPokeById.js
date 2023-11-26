@@ -12,7 +12,7 @@ const getPokeById = async (req, res) => {
 
             pokemon = formatSinglePoke(data);
 
-        } else { //REVISAR SI FUNCIONA.
+        } else {
             pokemon = await Pokemon.findOne({where: {id}})
         }
         return res.status(200).json(pokemon);

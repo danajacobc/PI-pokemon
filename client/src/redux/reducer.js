@@ -1,67 +1,22 @@
-import { ADD_FAV, GET_FAV, REMOVE_FAV, FILTER, ORDER } from "./actions";
+import { ALL_POKE, ID_POKE } from "./actions";
 
 const initialState = {
-    myFavorites: [],
-    allCharacters: [],
-    myFavoritesCopy: [],
+    allPokemons: [],
+    detail: {},
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_FAV:
+        case ALL_POKE:
             return { 
-                ...state, 
-                myFavorites: action.payload, 
-                allCharacters: action.payload 
+                ...state,  
+                allPokemons: action.payload,
             };
-
-            case GET_FAV:
-                return { 
-                    ...state, 
-                    myFavorites: action.payload
-                };
-
-            case REMOVE_FAV:
-                return { 
-                    ...state, 
-                    myFavorites: action.payload
-                };
-
-                // const filteredFavs = state.myFavorites.filter((c) => c.id != action.payload) //!== Number(action.payload)),
-                // return {
-                //     ...state,
-                //     myFavorites: filteredFavs,
-                //     allCharacters: filteredFavs,
-                // }
-
-            case FILTER:
-                if(action.payload === "All"){
-                     return {
-                        ...state,
-                        myFavorites: state.allCharacters,
-                    }
-                }
-               return {
+        case ID_POKE:
+            return {
                 ...state,
-                myFavorites: state.allCharacters.filter((c) => c.gender === action.payload),
-               }
-
-            case ORDER:
-                const ordenAscendente = action.payload === "A";
-
-               const ordenado = [...state.allCharacters].sort((a, b) => {
-                if(ordenAscendente) {
-                    return a.id - b.id
-                } else {
-                    return b.id - a.id
-                }
-               })
-
-                return {
-                ...state,
-                allCharactersCopy: state.allCharacters,
-                myFavorites: ordenado,
-                }
+                detail: action.payload,
+            }
 
         default: return {...state};
     }

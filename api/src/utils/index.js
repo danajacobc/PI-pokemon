@@ -18,12 +18,14 @@ const formatSinglePoke = (data) => {
         id: data.id,
         name: data.name,
         image: data.sprites?.other?.home?.front_default,
+        imageShiny: data.sprites?.other?.home?.front_shiny,
         hp: 0,
         attack: 0,
         defense: 0,
         speed: 0,
         height: data.height,
         weight: data.weight,
+        types: data.types?.map((type) => type.type.name),
     };
 
     data.stats.forEach((stat) => {
