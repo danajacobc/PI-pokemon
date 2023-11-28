@@ -1,8 +1,11 @@
 import { useState } from "react";
+import {useSelector, useDispatch} from 'react-redux';
 import styles from "../SearchBar/SearchBar.module.css"
+import { searchPoke } from "../../redux/actions";
 
-const SearchBar = ({ onSearch }) => {
-  const [name, setName] = useState("");
+const SearchBar = () => {
+  const [name, setName] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setName(event.target.value);
@@ -10,14 +13,14 @@ const SearchBar = ({ onSearch }) => {
   };
 
   const handleButtonSubmit = () => {
-    onSearch(name); 
+    dispatch(searchPoke(name)); 
     setName(''); 
   }
 
   return (
     <div className={styles.container}>
-      <input className={styles.input} type="search" placeholder="Ingrese el nombre" value={id} onChange={handleChange}/>
-      <button className={styles.button} onClick={handleButtonSubmit}>Buscar</button> 
+      <input className={styles.input} type="search" placeholder="Ingresa el nombre..." onChange={handleChange}/>
+      <button className={styles.button} onClick={handleButtonSubmit}> BUSCAR </button> 
     </div>
   );
 };

@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { pokeById } from "../../redux/actions";
 import { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
+import styles from '../DetailPage/Detail.module.css'
 
 
 const Detail = () => {
@@ -14,6 +16,13 @@ const Detail = () => {
     }, [])
 
     return (
+        <div>
+        <div className={styles.container}>
+        <Link to='/home'>
+            <button className={styles.button}>Home</button>
+        </Link>
+        </div>
+        
        <div>
         <h1>{poke.name}</h1>
         <img src={poke.image} />
@@ -24,6 +33,7 @@ const Detail = () => {
         <h2>Altura: {poke.height}</h2>
         <h2>Peso: {poke.weight}</h2>
         <h2>Tipo: {poke.types?.join(' ')}</h2>
+       </div>
        </div>
     )
    };

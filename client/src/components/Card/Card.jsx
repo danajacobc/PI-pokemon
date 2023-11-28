@@ -8,7 +8,7 @@ const Card = ({poke}) => {
         <Link to={`/detail/${poke.id}`}>
         <h1>{poke.name}</h1>
         </Link>
-        <h3>{poke.types.join(' - ')}</h3>
+        <h3>{poke.types}</h3>
 
     </div>
  )
