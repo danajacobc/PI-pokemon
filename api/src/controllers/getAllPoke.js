@@ -1,6 +1,6 @@
 const axios = require("axios");
 const {formatPokemonApi, formatMyPoke} = require('../utils/index');
-const {Pokemon} = require("../db");
+const {Pokemon, Type} = require("../db");
 
 const getAllPoke = async (req, res) => {
     try {
@@ -14,8 +14,16 @@ const getAllPoke = async (req, res) => {
 
         const allPokeAPI = formatPokemonApi(responses);
         //agregar para traer los pokes de mi bd
-        const findPokeDB = await Pokemon.findAll({where: {isFromAPI : false}});
+        const findPokeDB = await Pokemon.findAll({
+            include: {
+              model: Type,
+              attributes: ["name"],
+              through: { attributes: [] },
+            },
+          });
+        //console.log('aquiii', findPokeDB[0].dataValues.types[0].dataValues.name);
         const allPokeDB = findPokeDB.map((poke) => formatMyPoke(poke));
+       
 
         const allPoke = [...allPokeAPI, ...allPokeDB];
 

@@ -52,19 +52,23 @@ const formatSinglePoke = (data) => {
 
 //Función para crear mi propio Poke.
 const formatMyPoke = (data) => {
+    console.log('dataaaaaa:', data);
+
     const myPoke = {
-        id: data.id,
-        name: data.name,
-        image: data.image,
-        imageShiny: data.imageShiny,
-        hp: data.hp,
-        attack: data.attack,
-        defense: data.defense,
-        speed: data.speed,
-        height: data.height,
-        weight: data.weight,
-        isFromAPI: false,
+        id: dataValues.id,
+        name: dataValues.name,
+        image: dataValues.image,
+        imageShiny: dataValues.imageShiny,
+        hp: dataValues.hp,
+        attack: dataValues.attack,
+        defense: dataValues.defense,
+        speed: dataValues.speed,
+        height: dataValues.height,
+        weight: dataValues.weight,
+        types: dataValues.types.map((type) => type.dataValues?.name),
+        isFromAPI: dataValues.isFromAPI,
     };
+    //console.log('aaaaaaaaaa', data.types.type.name)
     return myPoke;
 }
 

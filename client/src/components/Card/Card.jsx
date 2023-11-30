@@ -8,6 +8,8 @@ const Card = ({poke}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    //let pokeTypes = poke.types.join(' - ');
+
     const handleClick = () => {
         dispatch(pokeById(poke.id, poke.isFromAPI))
         navigate('/detail');
@@ -20,7 +22,7 @@ const Card = ({poke}) => {
         
         <h1>{poke.name}</h1>
         
-        <h3>{poke.types}</h3>
+        <h3>{poke.types?.join(' - ')}</h3>
 
     </div>
  )

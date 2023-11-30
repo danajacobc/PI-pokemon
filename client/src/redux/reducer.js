@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
                 allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArray,
             };
 
-            case ORDER_ATTACK:
+        case ORDER_ATTACK:
                 let sortArr =
             action.payload === "A"
             ? state.allPokemons.sort((a, b) => {
@@ -70,18 +70,31 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArr,
             };
-            case GET_TYPES:
+        case GET_TYPES:
                 return {
                     ...state,
                     types: action.payload,
                 }
 
-            // case FILTER_ORIGIN:
-            //     let filterOr = 
-            //     action.payload === "A"
-            //     ? state.allPokemons.filter((o))
+        case FILTER_ORIGIN:
+                let filterOr = 
+                action.payload === "A"
+                ? state.allPokemons.filter((o) => o.isFromAPI == true)
+                : state.allPokemons.filter((o) => o.isFromAPI == false)
                 
-            //case FILTER_TYPES:
+                return {
+                    ...state,
+                    allPokemons: action.payload === "all" ? state.allPokemonsCopy : filterOr
+                }
+                
+        case FILTER_TYPES:
+            let filterType = state.allPokemons.filter((p) => p.types?.includes(action.payload));
+            // let filterType = state.allPokemons.filter((p) => p.types.some((type) => type.name === action.payload));
+            return {
+                ...state,
+                allPokemons: action.payload === "all" ? state.allPokemonsCopy : filterType,
+            }
+
                 
 
 
