@@ -9,7 +9,7 @@ try {
     if(!name || !image || !hp || !attack || !defense || !types || types.length < 2) return res.status(401).json({message: 'Faltan datos necesarios para crear el Pokemon.'})
 
     const datos = {name, image, imageShiny, hp, attack, defense, speed, height, weight}  
-    const newPoke = await Pokemon.create(datos)
+    const newPoke = await Pokemon.create(datos);
 
     
     const type = await Type.findAll({where: {name: types}});

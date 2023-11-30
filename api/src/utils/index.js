@@ -26,6 +26,7 @@ const formatSinglePoke = (data) => {
         height: data.height,
         weight: data.weight,
         types: data.types?.map((type) => type.type.name),
+        isFromAPI: true,
     };
 
     data.stats.forEach((stat) => {
@@ -62,6 +63,7 @@ const formatMyPoke = (data) => {
         speed: data.speed,
         height: data.height,
         weight: data.weight,
+        isFromAPI: false,
     };
     return myPoke;
 }

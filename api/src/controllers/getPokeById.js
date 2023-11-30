@@ -1,20 +1,25 @@
 const axios = require("axios");
-const {formatSinglePoke} = require("../utils");
+const {formatSinglePoke, formatMyPoke} = require("../utils");
 const {Pokemon} = require("../db");
 
 const getPokeById = async (req, res) => {
+    const {id} = req.params;
+    const {isFromAPI} = req.query;
+    
     try {
-        const {id} = req.params;
-
-        const {data} = await axios(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        let pokemon = {};
-        if(data){
-
+        let pokemon;
+        if(isFromAPI === "true") {
+            
+            const {data} = await axios(`https://pokeapi.co/api/v2/pokemon/${id}`)
             pokemon = formatSinglePoke(data);
-
         } else {
-            pokemon = await Pokemon.findOne({where: {id}})
-        }
+           
+            const dataDB = await Pokemon.findOne({where: {id}});
+           
+            pokemon = formatMyPoke(dataDB);
+            }
+        
+        
         return res.status(200).json(pokemon);
 
     } catch (error) {

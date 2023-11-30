@@ -19,7 +19,7 @@ const SearchBar = () => {
 
   return (
     <div className={styles.container}>
-      <input className={styles.input} type="search" placeholder="Ingresa el nombre..." onChange={handleChange}/>
+      <input className={styles.input} type="search" value={name} placeholder="Ingresa el nombre..." onChange={handleChange}/>
       <button className={styles.button} onClick={handleButtonSubmit}> BUSCAR </button> 
     </div>
   );

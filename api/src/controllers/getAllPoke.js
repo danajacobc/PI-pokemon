@@ -1,5 +1,6 @@
 const axios = require("axios");
-const {formatPokemonApi} = require('../utils/index');
+const {formatPokemonApi, formatMyPoke} = require('../utils/index');
+const {Pokemon} = require("../db");
 
 const getAllPoke = async (req, res) => {
     try {
@@ -11,7 +12,12 @@ const getAllPoke = async (req, res) => {
         const requests = allPokeUrls.map((url) => axios.get(url));
         const responses = await Promise.all(requests); //el promise.all NO resuelve las promesas en orden.
 
-        const allPoke = formatPokemonApi(responses);
+        const allPokeAPI = formatPokemonApi(responses);
+        //agregar para traer los pokes de mi bd
+        const findPokeDB = await Pokemon.findAll({where: {isFromAPI : false}});
+        const allPokeDB = findPokeDB.map((poke) => formatMyPoke(poke));
+
+        const allPoke = [...allPokeAPI, ...allPokeDB];
 
         return res.status(200).json(allPoke);
         

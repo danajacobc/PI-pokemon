@@ -1,19 +1,20 @@
 import { useParams } from "react-router-dom";
-import { pokeById } from "../../redux/actions";
+import { pokeById, resetDetail } from "../../redux/actions";
 import { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import styles from '../DetailPage/Detail.module.css'
 
 
+
 const Detail = () => {
-    const {id} = useParams();
+    
     const dispatch = useDispatch();
     const poke = useSelector(state => state.detail)
 
     useEffect(() => {
-        dispatch(pokeById(id))
-    }, [])
+        return () => {dispatch(resetDetail())};
+    }, [dispatch])
 
     return (
         <div>

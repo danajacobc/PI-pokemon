@@ -1,9 +1,10 @@
-import { ALL_POKE, ID_POKE, GET_NAME, ORDER_ALF, ORDER_ATTACK } from "./actions";
+import { ALL_POKE, ID_POKE, RESET_DETAIL, GET_NAME, ORDER_ALF, ORDER_ATTACK, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN} from "./actions";
 
 const initialState = {
     allPokemons: [],
     detail: {},
     allPokemonsCopy: [],
+    types: [],
     
 };
 
@@ -20,6 +21,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 detail: action.payload,
             };
+        case RESET_DETAIL:
+            return {
+                ...state,
+                detail: {},
+            };
         case GET_NAME:
 
             return {
@@ -27,7 +33,7 @@ const reducer = (state = initialState, action) => {
                 allPokemons: [action.payload],
             };
         case ORDER_ALF:
-            console.log(action.payload);
+            
             let sortArray =
             action.payload === "A"
             ? state.allPokemons.sort((a, b) => {
@@ -40,7 +46,7 @@ const reducer = (state = initialState, action) => {
                 if(b.name > a.name) return 1;
                 return 0;
             });
-            console.log('ordene', sortArray);
+            
             return {
                 ...state,
                 allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArray,
@@ -59,11 +65,25 @@ const reducer = (state = initialState, action) => {
                 if(b.attack > a.attack) return 1;
                 return 0;
             });
-            console.log('ordene', sortArr);
+            
             return {
                 ...state,
                 allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArr,
             };
+            case GET_TYPES:
+                return {
+                    ...state,
+                    types: action.payload,
+                }
+
+            // case FILTER_ORIGIN:
+            //     let filterOr = 
+            //     action.payload === "A"
+            //     ? state.allPokemons.filter((o))
+                
+            //case FILTER_TYPES:
+                
+
 
         default: return {...state};
     }

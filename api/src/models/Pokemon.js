@@ -43,7 +43,11 @@ module.exports = (sequelize) => {
    },
    weight: {
       type: DataTypes.DECIMAL,
-   }
+   },
+   // isFromAPI: {
+   //    type: DataTypes.BOOLEAN,
+   //    defaultValue: false,
+   // }
 
   }, { timestamps: false });
 };

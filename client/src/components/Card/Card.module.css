@@ -1,0 +1,15 @@
+.container {
+    width: auto;
+    margin: 8px;
+    box-sizing: border-box;
+    background-color: rgb(218, 166, 246);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+
+.image {
+    width: 50%;
+}
