@@ -7,6 +7,7 @@ export const GET_TYPES = "GET_TYPES";
 export const FILTER_TYPES = "FILTER_TYPE";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const RESET_DETAIL = "RESET_DETAIL";
+export const POKE_CREATE = "POKE_CREATE";
 
 import axios from "axios";
 
@@ -52,7 +53,7 @@ export const searchPoke = (name) => {
     try {
       const { data } = await axios.get(`http://localhost:3001/pokemons/name?name=${name}`);
       
-      dispatch({
+      return dispatch({
         type: "GET_NAME",
         payload: data,
       });
@@ -103,4 +104,20 @@ export const filterTypes = (types) => {
     type: "FILTER_TYPE",
     payload: types,
   };
+};
+
+export const pokeCreate = (payload) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post("http://localhost:3001/pokemons", payload);
+
+      return dispatch({
+        type: "POKE_CREATE", 
+        payload: response.data
+      });
+    } catch (error) {
+      alert(`Falla en el error: `, error);
+      return error;
+    }
+  }
 };

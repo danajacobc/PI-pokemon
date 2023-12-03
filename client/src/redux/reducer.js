@@ -1,4 +1,4 @@
-import { ALL_POKE, ID_POKE, RESET_DETAIL, GET_NAME, ORDER_ALF, ORDER_ATTACK, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN} from "./actions";
+import { ALL_POKE, ID_POKE, RESET_DETAIL, GET_NAME, ORDER_ALF, ORDER_ATTACK, GET_TYPES, FILTER_TYPES, FILTER_ORIGIN, POKE_CREATE} from "./actions";
 
 const initialState = {
     allPokemons: [],
@@ -89,11 +89,16 @@ const reducer = (state = initialState, action) => {
                 
         case FILTER_TYPES:
             let filterType = state.allPokemons.filter((p) => p.types?.includes(action.payload));
-            // let filterType = state.allPokemons.filter((p) => p.types.some((type) => type.name === action.payload));
             return {
                 ...state,
                 allPokemons: action.payload === "all" ? state.allPokemonsCopy : filterType,
             }
+        case POKE_CREATE:
+            return { 
+                ...state,  
+                allPokemons: [...state.allPokemons, action.payload],
+                allPokemonsCopy: [...state.allPokemonsCopy, action.payload],
+            };
 
                 
 

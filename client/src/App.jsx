@@ -6,6 +6,7 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import LandingPage from './components/LandingPage/LandingPage';
 import Home from './components/HomePage/Home';
 import Detail from './components/DetailPage/Detail';
+import FormCreate from './components/FormPage/FormCreate';
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/home" element={<Home />} />
       <Route path="/detail" element={<Detail />} />
+      <Route path="/create" element={<FormCreate/>}/>
     </Routes>
     </div>
   )

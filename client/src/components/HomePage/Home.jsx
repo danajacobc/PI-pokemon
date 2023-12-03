@@ -12,14 +12,26 @@ import {
 } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import styles from "../HomePage/Home.module.css";
+import Page from "../Pagination/Pagination";
 
 const Home = () => {
-  const pokeByName = useSelector((state) => state.allPokemons);
+  //const pokeByName = useSelector((state) => state.allPokemons);
   const pokemons = useSelector((state) => state.allPokemons);
   const allTypes = useSelector((state) => state.types);
-  const [orden, setOrden] = useState(""); //voy a mostrar que orden estoy aplicando.
+  const [orden, setOrden] = useState(""); //voy a mostrar que orden estoy aplicando, hace que vuelva a renderizar mi useEffect.
   //const [filtros, setFiltros] = useState();
   const dispatch = useDispatch();
+
+  /*Paginado*/
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pokePerPage, setPokePerPage] = useState(12);
+  const indexLastPoke = currentPage * pokePerPage; // 12 -> seria el indice del 13 poke
+  const indexFirstPoke = indexLastPoke -  pokePerPage; // 12 - 12 = 0 -> me da el indice del primer poke.
+  const currentPokes = pokemons.slice(indexFirstPoke, indexLastPoke);
+
+  const page = (pageNum) => {
+    setCurrentPage(pageNum) //seteo el estado, y esto hace que cambie el valor del resto de mis constantes del paginado.
+  }
 
   useEffect(() => {
     if (pokemons.length === 0) {
@@ -30,30 +42,39 @@ const Home = () => {
 
   /*handlers*/
   const handleOrderAlf = (e) => {
+    e.preventDefault();
     e.target.value === "all"
       ? dispatch(allPoke())
       : dispatch(orderAlf(e.target.value));
-    //setFiltros();
+    setCurrentPage(1);
     setOrden(`Ordenado ${e.target.value}`);
   };
 
   const handleOrderAtt = (e) => {
+    e.preventDefault();
     e.target.value === "all"
       ? dispatch(allPoke())
       : dispatch(orderAtt(e.target.value));
+    setCurrentPage(1);
     setOrden(`Ordenado ${e.target.value}`);
   };
 
   const handleFilterOrigin = (e) => {
+    e.preventDefault();
     dispatch(filterOrigin(e.target.value));
+    setCurrentPage(1);
   };
 
   const handleFilterType = (e) => {
+    e.preventDefault();
     dispatch(filterTypes(e.target.value));
+    setCurrentPage(1);
   };
 
   const handleClick = (e) => {
+    e.preventDefault();
     dispatch(allPoke(e.target.value));
+    setCurrentPage(1)
   };
 
   return (
@@ -109,32 +130,36 @@ const Home = () => {
           {allTypes?.map((t, i) => {
                   return (
                     <option value={t.name} key={i}>
-                        {t.name}
-                      {/* {t.name.charAt(0).toUpperCase() + t.name.slice(1)} */}
+                      {t.name.charAt(0).toUpperCase() + t.name.slice(1)}
                     </option>
                   );
                 })}
           
         </select>
 
-        <SearchBar />
-        {pokeByName && <Card key={pokeByName.id} poke={pokeByName} />}
+        <SearchBar setCurrentPage={setCurrentPage}/>
+        {/* {pokeByName && <Card key={pokeByName.id} poke={pokeByName} />} */}
 
         <button className={styles.button} onClick={handleClick}> Refresh </button>
-
+        <Link to="/create">
+          <button className={styles.button}> Create </button>
+        </Link>
         <Link to="/">
           <button className={styles.button}> Salir </button>
         </Link>
       </div>
-
+      
       <div className={styles.containerCards}>
-        {pokemons.length > 0 ? pokemons.map((poke) => (
+        {pokemons.length > 0 ? currentPokes.map((poke) => (
           <Card key={poke.id} poke={poke} />
         ))
         : <div>
             <h3> ¡No se encontraron pokemons! </h3>
             <img className={styles.imageLoading} src='https://pa1.aminoapps.com/6515/a679c273ddaf134771ec2669ed86b0cea90faa35_hq.gif' />
         </div> }
+      </div>
+      <div>
+        <Page setCurrentPage={setCurrentPage} pokePerPage={pokePerPage} pokemons={pokemons.length} page={page} current={currentPage}/>
       </div>
     </div>
   );

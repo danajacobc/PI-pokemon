@@ -32,8 +32,7 @@ const Detail = () => {
         <h2>Velocidad: {poke.speed}</h2>
         <h2>Altura: {poke.height}</h2>
         <h2>Peso: {poke.weight}</h2>
-        <h2>Tipo: {poke.types?.join(' - ')}
-        </h2>
+        <h2>Tipo: {poke.types?.join(' - ')}</h2>
       
       </div>
     </div>
