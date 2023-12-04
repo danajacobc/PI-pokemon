@@ -2,14 +2,16 @@ import { useParams } from "react-router-dom";
 import { pokeById, resetDetail } from "../../redux/actions";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../DetailPage/Detail.module.css";
 
 const Detail = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const poke = useSelector((state) => state.detail);
 
   useEffect(() => {
+    if(!Object.keys(poke).length > 0) navigate('/home');
     return () => {
       dispatch(resetDetail());
     };

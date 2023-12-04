@@ -4,8 +4,7 @@ const initialState = {
     allPokemons: [],
     detail: {},
     allPokemonsCopy: [],
-    types: [],
-    
+    types: [],  
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,25 +33,29 @@ const reducer = (state = initialState, action) => {
             };
         case ORDER_ALF:
             
+            if(action.payload === "default") return {...state};
             let sortArray =
             action.payload === "A"
             ? state.allPokemons.sort((a, b) => {
-                if(a.name > b.name) return 1;
-                if(b.name > a.name) return -1;
+                console.log('a', a.name);
+                if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+                if(b.name.toLowerCase() > a.name.toLowerCase()) return -1;
                 return 0;
             })
             : state.allPokemons.sort((a, b) => {
-                if(a.name > b.name) return -1;
-                if(b.name > a.name) return 1;
+                if(a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+                if(b.name.toLowerCase() > a.name.toLowerCase()) return 1;
                 return 0;
             });
             
             return {
                 ...state,
-                allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArray,
+                allPokemons: sortArray,
+                // allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArray,
             };
 
         case ORDER_ATTACK:
+            if(action.payload === "default") return {...state}
                 let sortArr =
             action.payload === "A"
             ? state.allPokemons.sort((a, b) => {
@@ -68,7 +71,8 @@ const reducer = (state = initialState, action) => {
             
             return {
                 ...state,
-                allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArr,
+                allPokemons: sortArr
+                // allPokemons: action.payload === "all" ? state.allPokemonsCopy : sortArr,
             };
         case GET_TYPES:
                 return {

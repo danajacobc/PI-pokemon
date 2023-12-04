@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "../FormPage/FormCreate.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { pokeCreate, getTypes } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const validation = (input, pokemons) => {
   let errors = {};
@@ -14,8 +15,6 @@ const validation = (input, pokemons) => {
     errors.name = "El nombre debe tener entre 2 y 15 caracteres.";
   if (pokemons.some((e) => e.name === input.name))
     errors.name = "El nombre ingresado ya existe.";
-  if (!/^(ftp|http|https):\/\/[^ "]+$/.test(input.image))
-    errors.image = "La imagen debe ser proporcionada a través de URL.";
   if (input.hp > 350) errors.hp = "El valor HP máximo es 350";
   if (input.attack > 500) errors.attack = "El valor Attack máximo es 500";
   if (input.defense > 500) errors.defense = "El valor Defense máximo es 500";
@@ -36,6 +35,7 @@ const habilitedButton = (b) => {
 
 const FormCreate = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const pokemons = useSelector((state) => state.allPokemonsCopy);
   const allTypes = useSelector((state) => state.types);
 
@@ -46,12 +46,12 @@ const FormCreate = () => {
   const [input, setInput] = useState({
     name: "",
     image: "",
-    hp: "",
-    attack: "",
-    defense: "",
-    speed: "",
-    height: "",
-    weight: "",
+    hp: "33",
+    attack: "33",
+    defense: "33",
+    speed: "33",
+    height: "33",
+    weight: "33",
     types: [],
   });
   const [errors, setErrors] = useState({
@@ -75,26 +75,26 @@ const FormCreate = () => {
   const handleSelect = (e) => {
     const type = e.target.value;
     const newTypes = input.types;
-    newTypes.push(type.charAt(0).toUpperCase() + type.slice(1));
+    newTypes.push(type);
     setInput({ ...input, types: newTypes });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    console.log("me ejecute");
     dispatch(pokeCreate(input));
     alert("Pokémon create! 👌");
     setInput({
       name: "",
+      image: "",
       hp: "",
       attack: "",
       defense: "",
       speed: "",
       height: "",
       weight: "",
-      image: "",
       types: [],
     });
+   navigate('/home');
   };
   const handleChange = (e) => {
     setInput({
@@ -146,7 +146,6 @@ const FormCreate = () => {
             onChange={(e) => handleChange(e)}
             placeholder="URL image"
           />
-          {errors.image && <p className={styles.inputError}>{errors.image}</p>}
           </div>
           <div className={styles.inputContainer}>
           <label>HP: </label>
@@ -235,6 +234,7 @@ const FormCreate = () => {
               {allTypes?.map((t, i) => {
                 return (
                   <option value={t.name} key={i}>
+                    {/* {t.name} */}
                     {t.name.charAt(0).toUpperCase() + t.name.slice(1)}
                   </option>
                 );
@@ -243,7 +243,7 @@ const FormCreate = () => {
             {errors.types && <p className={styles.inputError}>{errors.types}</p>}
           </div>
 
-          <button className={styles.button} type="submit">
+          <button className={styles.button} disabled={!input.name || !input.hp || !input.attack || !input.defense || !input.types || errors.name} type="submit">
             Create My Pokémon
           </button>
         </form>

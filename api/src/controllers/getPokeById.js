@@ -22,6 +22,7 @@ const getPokeById = async (req, res) => {
           }
         ]
       });
+      console.log(dataDB);
       pokemon = formatMyPoke(dataDB);
     }
     

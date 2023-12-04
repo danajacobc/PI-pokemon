@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       isUrl: true,
-      defaultValue: 'https://nintendo.pe/wp-content/uploads/2016/05/HddtBOT-copia.jpg'
+      //defaultValue: 'https://nintendo.pe/wp-content/uploads/2016/05/HddtBOT-copia.jpg'
    },
    imageShiny: {
       type: DataTypes.STRING,

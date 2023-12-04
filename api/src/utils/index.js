@@ -52,7 +52,7 @@ const formatSinglePoke = (data) => {
 
 //Función para crear mi propio Poke.
 const formatMyPoke = (data) => {
-
+    
     const myPoke = {
         id: data.id,
         name: data.name,

@@ -1,15 +1,36 @@
 .container {
     width: calc(20% - 10px);
-    margin: 8px;
-    box-sizing: border-box;
+    height: 300px;
+    margin: 10px;
     background-color: rgb(218, 166, 246);
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:center;
+    cursor: pointer;
 }
 
 .image {
-    width: 50%;
+    width: 90%;
+    height: 150px;
+    background-color: red;
+}   
+
+.name {
+    font-size: 10px;
+}
+
+.types {
+    background-color: aqua;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 30px;
+    font-size: 15px;
+}
+
+.type {
+    background-color: blue;
 }
