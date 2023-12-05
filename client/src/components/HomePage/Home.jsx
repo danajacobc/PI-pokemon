@@ -20,7 +20,6 @@ const Home = () => {
   const pokesBackUp = useSelector((state) => state.allPokemonsCopy);
   const allTypes = useSelector((state) => state.types);
   const [orden, setOrden] = useState(""); //voy a mostrar que orden estoy aplicando, hace que vuelva a renderizar mi useEffect.
-  //const [filtros, setFiltros] = useState();
   const dispatch = useDispatch();
 
   /*Paginado*/
@@ -89,6 +88,7 @@ const Home = () => {
       >
         {isExpanded ? (
           <div className={styles.menuContainer}>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" width="150px"/>
             <div className={styles.filterContainer}>
               <h4>Filtros</h4>
 
@@ -149,7 +149,13 @@ const Home = () => {
             </div>
           </div>
         ) : (
-          <h3>a</h3> 
+          <div className={styles.menuContainerClose}>
+            <div className={styles.menuLogo}>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" width="80px"/>
+            <img src="https://cdn-icons-png.flaticon.com/512/3588/3588249.png" width="50px"/>
+            </div>
+            <img src="https://detectivepikachu.pokemon.com/_images/characters/pikachu-intro.png" width="80px"/>
+            </div>
           // cambiar por pikachu y icono de menu
         )}
       </div>

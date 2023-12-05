@@ -21,7 +21,7 @@ const SearchBar = ({setCurrentPage}) => {
 
   return (
     <div className={styles.container}>
-      <input className={styles.input} type="search" value={name} placeholder="Ingresa el nombre..." onChange={handleChange}/>
+      <input className={styles.input} type="search" value={name} placeholder="Busca por nombre..." onChange={handleChange}/>
       <button className={styles.button} onClick={handleButtonSubmit}> 🔎 </button> 
     </div>
   );

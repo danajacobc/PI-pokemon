@@ -15,11 +15,12 @@ const Card = ({ poke }) => {
 
   return (
     <div className={styles.container} onClick={handleClick}>
+      <div className={styles.card}>
       <div className={styles.name}>
         <h1>{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}</h1>
       </div>
       <div className={styles.image}>
-        <img src={poke.image} width="70px" />
+        <img src={poke.image} width="200px" />
       </div>
       <div className={styles.types}>
         {poke.types &&
@@ -36,6 +37,7 @@ const Card = ({ poke }) => {
               </h3>
             </div>
           ))}
+      </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from "../Pagination/Pagination.module.css";
 
 const Page = ({pokePerPage, pokemons, page, current, setCurrentPage}) => {
     const pageNumbers = [];
@@ -19,23 +20,23 @@ const Page = ({pokePerPage, pokemons, page, current, setCurrentPage}) => {
 
     return(
         <nav>
-            <div>
+            <div className={styles.paginado}>
                 {pageNumbers.length !== 0 ? (
-                    <button onClick={prevPage}>
-                        ⬅️
+                    <button className={styles.button} onClick={prevPage}>
+                       ↩ 
                     </button>
                 ) : null }
 
                 {pageNumbers &&
                 pageNumbers.map(num =>(
-                    <button key={num} onClick={() => page(num)}>
+                    <button className={styles.button} key={num} onClick={() => page(num)}>
                         <a>{num}</a>
                     </button>
                 ))}
 
                 {pageNumbers.length !== 0 ? (
-                    <button onClick={nextPage}>
-                        ➡️
+                    <button className={styles.button} onClick={nextPage}>
+                        ↪
                     </button>
                 ) : null }
             </div>

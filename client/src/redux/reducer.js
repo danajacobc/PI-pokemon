@@ -83,8 +83,8 @@ const reducer = (state = initialState, action) => {
         case FILTER_ORIGIN:
                 let filterOr = 
                 action.payload === "A"
-                ? state.allPokemons.filter((o) => o.isFromAPI == true)
-                : state.allPokemons.filter((o) => o.isFromAPI == false)
+                ? state.allPokemonsCopy.filter((o) => o.isFromAPI == true)
+                : state.allPokemonsCopy.filter((o) => o.isFromAPI == false)
                 
                 return {
                     ...state,
