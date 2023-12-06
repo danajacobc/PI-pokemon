@@ -15,19 +15,14 @@ const validation = (input, pokemons) => {
     errors.name = "El nombre debe tener entre 2 y 15 caracteres.";
   if (pokemons.some((e) => e.name === input.name))
     errors.name = "El nombre ingresado ya existe.";
-  if (input.hp > 350) errors.hp = "El valor HP máximo es 350";
-  if (input.attack > 500) errors.attack = "El valor Attack máximo es 500";
-  if (input.defense > 500) errors.defense = "El valor Defense máximo es 500";
+  if (input.hp < 1 ||input.hp > 350) errors.hp = "El valor HP máximo es 350";
+  if (input.attack < 1 || input.attack > 500) errors.attack = "El valor Attack máximo es 500";
+  if (input.defense < 1 || input.defense > 500) errors.defense = "El valor Defense máximo es 500";
   if (input.height <= 0 || input.height > 1000)
     errors.height = "La altura mínima es 1 y máxima es 1000";
   if (input.weight <= 0 || input.weight > 700)
     errors.weight = "El peso mínimo es 1 y máximo es 700";
-  console.log('err0r', errors.types)
   if (!input.types || input.types.length === 0) errors.types = "Ingrese obligatoriamente hasta 2 tipos.";
-  console.log('err000000r', errors.types)
-  // if (input.types.length <= 1 || input.types.length >=2) errors.types = "Ingrese obligatoriamente hasta 2 tipos.";
-
-  
 
   return errors;
 };
@@ -60,11 +55,11 @@ const FormCreate = () => {
   });
   const [errors, setErrors] = useState({
     name: "Required Name",
-    image: " ",
+    image: "",
     hp: "Required HP",
     attack: "Required Attack",
     defense: "Required Defense",
-    speed: " ",
+    speed: "",
     height: "",
     weight: "",
     types: "Required Types",
@@ -85,7 +80,7 @@ const FormCreate = () => {
       validation(
         {
           ...input,
-         types: type,
+         types: newTypes,
         },
         pokemons //le envio el estado a validation por props
       )
@@ -121,36 +116,47 @@ const FormCreate = () => {
           ...input,
           [e.target.name]: e.target.value,
         },
-        pokemons //le envio el estado a validation por props
+        pokemons 
       )
     );
   };
 
-  const handleDelete = (index, e) => {
-    e.stopPropagation();
-    const newTypes = input.types.filter((_, i) => i !== index);
-    setInput({ ...input, types: newTypes });
+  const handleDelete = (type) => {
+    input.types.length === 0 ? setButton(false) : setButton(true);
+    setInput({
+      ...input,
+      types: input.types.filter((t) => t !== type),
+    });
+    setErrors(
+      validation(
+        {
+          ...input,
+          types: input.types.filter((t) => t !== type),
+        },
+        pokemons 
+      )
+    );
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.containerNav}>
         <div className={styles.crea}>
-          <h1>Crea tu propio</h1>
+          <h1>✏️ Create your</h1>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png"
             width="300px"
           />
         </div>
         <Link to="/home">
-          <button className={styles.button}>Home</button>
+          <button className={styles.button}>🏡 Home</button>
         </Link>
       </div>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.containerForm}>
-          <div className={styles.form}>
+          <div >
             <div className={styles.inputContainer}>
-              <label>Name: </label>
+              <label>✨ Name:</label>
               <input
                 className={styles.input}
                 type="text"
@@ -166,7 +172,7 @@ const FormCreate = () => {
             
             
             <div className={styles.inputContainer}>
-              <label>Image: </label>
+              <label>📸 Image:</label>
               <input
                 className={styles.input}
                 type="url"
@@ -177,7 +183,7 @@ const FormCreate = () => {
               />
             </div>
             <div className={styles.inputContainer}>
-              <label>HP: </label>
+              <label>❤️ HP:</label>
               <input
                 className={styles.input}
                 type="number"
@@ -191,7 +197,7 @@ const FormCreate = () => {
           </div>
             <div className={styles.form}>
             <div className={styles.inputContainer}>
-              <label>Attack: </label>
+              <label>⚔️ Attack:</label>
               <input
                 className={styles.input}
                 type="number"
@@ -205,7 +211,7 @@ const FormCreate = () => {
               )}
             </div>
             <div className={styles.inputContainer}>
-              <label>Defense: </label>
+              <label>🛡️ Defense:</label>
               <input
                 className={styles.input}
                 type="number"
@@ -219,7 +225,7 @@ const FormCreate = () => {
                 )}
                 </div>
             <div className={styles.inputContainer}>
-              <label>Speed: </label>
+              <label>⚡Speed: </label>
               <input
                 className={styles.input}
                 type="number"
@@ -233,7 +239,7 @@ const FormCreate = () => {
             
           <div className={styles.form}>
             <div className={styles.inputContainer}>
-              <label>Height: </label>
+              <label>📏 Height:</label>
               <input
                 className={styles.input}
                 type="number"
@@ -247,7 +253,7 @@ const FormCreate = () => {
               )}
             </div>
             <div className={styles.inputContainer}>
-              <label>Weight: </label>
+              <label>⚖️ Weight:</label>
               <input
                 className={styles.input}
                 type="number"
@@ -261,25 +267,7 @@ const FormCreate = () => {
               )}
             </div>
           <div className={styles.inputContainerType}>
-            <div className={styles.types}>
-              {input.types.map((type, index) => (
-                <div className={styles.type} key={index}>
-                  <img
-                    width="30px"
-                    src={imgTypes[`${type}`]}
-                  />
-                  <h3 key={index}>
-                    {type && type.charAt(0).toUpperCase() + type.slice(1)}
-                  </h3>
-                <span
-                key={index}
-                className={styles.deleteButton}
-                onClick={(e) => handleDelete(index, e)}
-                >
-              ✖️
-              </span>
-                </div>
-              ))}
+            <div className={styles.allTypes}>
 
               <select
                 className={styles.button}
@@ -288,7 +276,7 @@ const FormCreate = () => {
                 onChange={(e) => handleSelect(e)}
                 defaultValue="select"
                 disabled={input.types.length === 2}
-              >
+                >
                 <option value="select" disabled>
                   Select Type
                 </option>
@@ -300,25 +288,40 @@ const FormCreate = () => {
                   );
                 })}
               </select>
+              <div className={styles.types}>
+                {input.types.map((type, index) => (
+                  <div className={styles.type} key={index}>
+                    <img
+                      width="30px"
+                      src={imgTypes[`${type}`]}
+                    />
+                    <h3 key={index}>
+                      {type && type.charAt(0).toUpperCase() + type.slice(1)}
+                    </h3>
+                  <span
+                  key={index}
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(type)}
+                  >
+                ✖️
+                </span>
+                  </div>
+                ))}
               </div>
-              <div >
+              </div>
+              <div>
               {input.types.length === 0 && (
                 <p className={styles.inputErrorType}>{errors.types}</p>
               )}
-              <h3>{input.types.length}</h3>
+             
               </div>
             
           </div>
           </div>
         </div>
 
-          {!input.name ||
-          !input.hp ||
-          !input.attack ||
-          !input.defense ||
-          input.types.length === 0||
-          errors.types ||
-          errors.name ? null : (
+          {!input.name || !input.hp || !input.attack || !input.defense || input.types.length === 0 ||
+          errors.types || errors.name ? null : (
             <button className={styles.button} type="submit" >
               Create My Pokémon
             </button>

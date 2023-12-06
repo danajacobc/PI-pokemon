@@ -4,7 +4,7 @@ const { Pokemon, Type } = require("../db");
 
 const getPokeById = async (req, res) => {
   const { id } = req.params;
-  const { isFromAPI } = req.query;
+  const { isFromAPI } = req.query; //se a donde buscar.
 
   try {
     let pokemon;
@@ -22,7 +22,7 @@ const getPokeById = async (req, res) => {
           }
         ]
       });
-      console.log(dataDB);
+      
       pokemon = formatMyPoke(dataDB);
     }
     

@@ -29,7 +29,7 @@ const Home = () => {
   const indexLastPoke = currentPage * pokePerPage; // 12 -> seria el indice del 13 poke
   const indexFirstPoke = indexLastPoke - pokePerPage; // 12 - 12 = 0 -> me da el indice del primer poke.
   const currentPokes = pokemons.slice(indexFirstPoke, indexLastPoke);
-
+  /*SideBar*/
   const [isExpanded, setIsExpanded] = useState(false);
 
   const page = (pageNum) => {
@@ -79,6 +79,16 @@ const Home = () => {
     setCurrentPage(1);
   };
 
+  // if (pokemons.length === 0) {
+  //   return <div className={styles.loading}>
+  //       <h2>Loading...</h2>
+  //       <img
+  //         src="https://media.tenor.com/4K2_dLLq-pwAAAAi/charmander-chases-tail.gif"
+  //         alt="loading"
+  //       />
+  //     </div>
+  // }
+
   return (
     <div className={styles.container}>
       <div
@@ -90,7 +100,7 @@ const Home = () => {
           <div className={styles.menuContainer}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" width="150px"/>
             <div className={styles.filterContainer}>
-              <h4>Filtros</h4>
+              <h4>Filter</h4>
 
               <select
                 className={styles.button}
@@ -99,7 +109,7 @@ const Home = () => {
                 onChange={(e) => handleFilterOrigin(e)}
                 defaultValue="all"
               >
-                <option value="all">Todos</option>
+                <option value="all">All</option>
                 <option value="A">API</option>
                 <option value="DB">DataBase</option>
               </select>
@@ -111,7 +121,7 @@ const Home = () => {
                 onChange={(e) => handleFilterType(e)}
                 defaultValue="all"
               >
-                <option value="all">Todos</option>
+                <option value="all">All</option>
                 {allTypes?.map((t, i) => {
                   return (
                     <option value={t.name} key={i}>
@@ -122,7 +132,7 @@ const Home = () => {
               </select>
             </div>
             <div className={styles.orderContainer}>
-              <h4>Orden</h4>
+              <h4>Order</h4>
               <select
                 className={styles.button}
                 name="orderAlf"
@@ -130,9 +140,9 @@ const Home = () => {
                 onChange={(e) => handleOrderAlf(e)}
                 defaultValue="default"
               >
-                <option value="default">Alfabéticamente</option>
-                <option value="A">Ascendente</option>
-                <option value="D">Descendente</option>
+                <option value="default">Alphabetically</option>
+                <option value="A">Ascendent</option>
+                <option value="D">Descendent</option>
               </select>
 
               <select
@@ -142,9 +152,9 @@ const Home = () => {
                 onChange={(e) => handleOrderAtt(e)}
                 defaultValue="default"
               >
-                <option value="default">Ataque</option>
-                <option value="A">Menor a Mayor</option>
-                <option value="D">Mayor a Menor</option>
+                <option value="default">Attack</option>
+                <option value="A">Min to Max</option>
+                <option value="D">Max to Min</option>
               </select>
             </div>
           </div>
@@ -156,7 +166,6 @@ const Home = () => {
             </div>
             <img src="https://detectivepikachu.pokemon.com/_images/characters/pikachu-intro.png" width="80px"/>
             </div>
-          // cambiar por pikachu y icono de menu
         )}
       </div>
       <div className={styles.containerNav}>
@@ -165,15 +174,12 @@ const Home = () => {
         <SearchBar setCurrentPage={setCurrentPage} />
         {/* {pokeByName && <Card key={pokeByName.id} poke={pokeByName} />} */}
 
-        <button className={styles.button} onClick={handleClick}>
-          {" "}
-          Refresh{" "}
-        </button>
+        <button className={styles.button} onClick={handleClick}>Refresh</button>
         <Link to="/create">
           <button className={styles.button}> Create </button>
         </Link>
         <Link to="/">
-          <button className={styles.button}> Salir </button>
+          <button className={styles.button}> Leave </button>
         </Link>
       </div>
       <div className={styles.displayContainer}>
@@ -190,12 +196,19 @@ const Home = () => {
           {pokemons.length > 0 ? (
             currentPokes.map((poke) => <Card key={poke.id} poke={poke} />)
           ) : (
-            <div>
-              <h3> ¡No se encontraron pokemons! </h3>
-              <img
-                className={styles.imageLoading}
-                src="https://pa1.aminoapps.com/6515/a679c273ddaf134771ec2669ed86b0cea90faa35_hq.gif"
-              />
+            // <div>
+            //   <h3> ¡Not found pokémons! </h3>
+            //   <img
+            //     className={styles.imageLoading}
+            //     src="https://pa1.aminoapps.com/6515/a679c273ddaf134771ec2669ed86b0cea90faa35_hq.gif"
+            //   />
+            // </div>
+            <div className={styles.loading}>
+            <h2>Loading...</h2>
+            <img
+             src="https://media.tenor.com/4K2_dLLq-pwAAAAi/charmander-chases-tail.gif"
+             alt="loading"
+            />
             </div>
           )}
         </div>

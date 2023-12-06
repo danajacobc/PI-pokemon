@@ -30,7 +30,7 @@ const Page = ({pokePerPage, pokemons, page, current, setCurrentPage}) => {
                 {pageNumbers &&
                 pageNumbers.map(num =>(
                     <button className={styles.button} key={num} onClick={() => page(num)}>
-                        <a>{num}</a>
+                        <a style={{ fontWeight: current === num ? 'bold' : 'normal' }}>{num}</a>
                     </button>
                 ))}
 

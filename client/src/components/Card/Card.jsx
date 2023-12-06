@@ -8,14 +8,16 @@ const Card = ({ poke }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    console.log('me ejecute');
+    e.preventDefault();
     dispatch(pokeById(poke.id, poke.isFromAPI));
     navigate("/detail");
   };
 
   return (
-    <div className={styles.container} onClick={handleClick}>
-      <div className={styles.card}>
+    <div className={styles.container} onClick={(e) => handleClick(e)}>
+      
       <div className={styles.name}>
         <h1>{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}</h1>
       </div>
@@ -38,7 +40,7 @@ const Card = ({ poke }) => {
             </div>
           ))}
       </div>
-      </div>
+      
     </div>
   );
 };

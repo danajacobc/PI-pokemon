@@ -11,14 +11,17 @@ const getPokeByName = async (req, res) => {
         
         const lowercaseName = name.toLowerCase();
         let pokemon = {};
+
+        pokemon = await Pokemon.findOne({where: { name: lowercaseName}});
+        if(pokemon) {
+            return res.status(200).json(pokemon);
+        } 
+        
         const {data} = await axios(`https://pokeapi.co/api/v2/pokemon/${lowercaseName}`)
 
         if(data){
             pokemon = formatSinglePoke(data);
-        } else { //REVISAR SI FUNCIONA.
-            pokemon = await Pokemon.findOne({where: { name: { [Op.iLike]: `%${name}%` }}});
         }
-      
         if(!pokemon)return res.status(404).json({message: `No existe un pokemon llamado ${name}`});
         
         return res.status(200).json(pokemon);

@@ -5,7 +5,7 @@ const updateMyPoke = async (req, res) => {
         const {id} = req.params;
         const update = req.body;
         
-        const [datasUpdate] = await Pokemon.update( update , { where: {id: id} }); //destructuro para que me devuelva la cantidad de filas act.
+        const [datasUpdate] = await Pokemon.update( update , { where: {id: id} }); //[destructuro] para que me devuelva la cantidad de filas actuales.
 
         if(datasUpdate === 0) return res.status(200).json({ message: "El Pokemon no se ha encontrado!"});
 

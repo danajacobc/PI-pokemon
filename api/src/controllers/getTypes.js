@@ -13,9 +13,9 @@ const getTypes = async (req, res) => {
         });
         const allTypes = await Promise.all(typesMap.map(async (type) => {
             const [savedType, created] = await Type.findOrCreate({
-                where: {name: type.name}
+                where: {name: type.name} //creo una instancia para cada type
             });
-            return savedType;
+            return savedType; //busco/guardo y devuelvo.
         }))
 
         return res.status(200).json(allTypes);

@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
         case RESET_DETAIL:
             return {
                 ...state,
-                detail: {},
+                detail: {loading: true},
             };
         case GET_NAME:
 
@@ -83,8 +83,8 @@ const reducer = (state = initialState, action) => {
         case FILTER_ORIGIN:
                 let filterOr = 
                 action.payload === "A"
-                ? state.allPokemonsCopy.filter((o) => o.isFromAPI == true)
-                : state.allPokemonsCopy.filter((o) => o.isFromAPI == false)
+                ? state.allPokemons.filter((o) => o.isFromAPI == true)
+                : state.allPokemons.filter((o) => o.isFromAPI == false)
                 
                 return {
                     ...state,

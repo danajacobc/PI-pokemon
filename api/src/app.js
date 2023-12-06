@@ -1,3 +1,5 @@
+//configuración de mi API
+
 const express = require('express');
 const server = express();
 const cookieParser = require('cookie-parser');
@@ -9,7 +11,7 @@ require('./db.js');
 
 
 server.name = 'API';
-server.use(express.json());
+server.use(express.json()); //middleware para poder interpretar json que me mandan desde el front.
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
@@ -23,7 +25,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', routes);
+server.use('/', routes); //especifico las rutas que se utilizaran. -> voy a routes.
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
