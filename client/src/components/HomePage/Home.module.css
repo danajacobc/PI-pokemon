@@ -12,6 +12,13 @@
     position: relative; 
 }
 
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
+
 .sideBar {
     background: rgb(250,239,70);
     background: linear-gradient(0deg, rgba(250,239,70,1) 0%, rgba(255,132,0,1) 100%);
@@ -69,7 +76,7 @@
 .filterContainer {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 3px;
     align-items: center;
     width: 100%;
     height: 50%;

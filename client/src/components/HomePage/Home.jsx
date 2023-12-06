@@ -100,8 +100,9 @@ const Home = () => {
           <div className={styles.menuContainer}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" width="150px"/>
             <div className={styles.filterContainer}>
-              <h4>Filter</h4>
-
+              <h4>Filter 🔍</h4>
+              <div className={styles.filter}>
+              <h5>Origin</h5>
               <select
                 className={styles.button}
                 name="filterOrigin"
@@ -113,7 +114,7 @@ const Home = () => {
                 <option value="A">API</option>
                 <option value="DB">DataBase</option>
               </select>
-
+              <h5>Types</h5>
               <select
                 className={styles.button}
                 name="filterType"
@@ -130,9 +131,10 @@ const Home = () => {
                   );
                 })}
               </select>
+              </div>
             </div>
             <div className={styles.orderContainer}>
-              <h4>Order</h4>
+              <h4>Order 🔍</h4>
               <select
                 className={styles.button}
                 name="orderAlf"

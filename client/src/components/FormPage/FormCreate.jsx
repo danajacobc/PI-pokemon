@@ -162,6 +162,7 @@ const FormCreate = () => {
                 type="text"
                 value={input.name}
                 name="name"
+                autocomplete="off"
                 onChange={(e) => handleChange(e)}
                 placeholder="Pokémon name"
               />

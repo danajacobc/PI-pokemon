@@ -34,7 +34,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
 }
 
 .form {
@@ -54,7 +54,7 @@
     align-items: start;
     justify-content: start;
     gap: 10px;
-    height: 100px;
+    height: 115px;
 }
 
 .inputContainerType {

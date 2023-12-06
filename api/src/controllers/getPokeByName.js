@@ -1,5 +1,5 @@
 const axios = require("axios");
-const {formatSinglePoke} = require("../utils");
+const {formatSinglePoke, formatMyPoke} = require("../utils");
 const {Pokemon, Type} = require("../db");
 const {Op} = require('sequelize');
 
@@ -12,10 +12,17 @@ const getPokeByName = async (req, res) => {
         const lowercaseName = name.toLowerCase();
         let pokemon = {};
 
-        pokemon = await Pokemon.findOne({where: { name: { [Op.iLike]: lowercaseName }}});
-        
-        if(pokemon) {
-            return res.status(200).json(pokemon);
+        pokemon = await Pokemon.findOne({where: { name: { [Op.iLike]: `${name}` }}, 
+        include: [ //que incluya esta asociación en particular al recuperar el registro.
+          {
+            model: Type,
+            attributes: ["name"],
+            through: { attributes: [] },
+          }
+        ]});
+        let poke = formatMyPoke(pokemon)
+        if(poke) {
+            return res.status(200).json(poke);
         } 
         
         const {data} = await axios(`https://pokeapi.co/api/v2/pokemon/${lowercaseName}`)
