@@ -1,6 +1,6 @@
 const axios = require("axios");
 const {formatSinglePoke} = require("../utils");
-const {Pokemon} = require("../db");
+const {Pokemon, Type} = require("../db");
 const {Op} = require('sequelize');
 
 const getPokeByName = async (req, res) => {
@@ -12,7 +12,8 @@ const getPokeByName = async (req, res) => {
         const lowercaseName = name.toLowerCase();
         let pokemon = {};
 
-        pokemon = await Pokemon.findOne({where: { name: lowercaseName}});
+        pokemon = await Pokemon.findOne({where: { name: { [Op.iLike]: lowercaseName }}});
+        
         if(pokemon) {
             return res.status(200).json(pokemon);
         } 
