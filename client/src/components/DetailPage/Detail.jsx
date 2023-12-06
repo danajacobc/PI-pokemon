@@ -1,7 +1,7 @@
 import { pokeById, resetDetail } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "../DetailPage/Detail.module.css";
 import * as imgTypes from "../ExportTypesImage/ExportTypesImage";
 
