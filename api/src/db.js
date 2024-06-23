@@ -5,12 +5,19 @@ const fs = require('fs');
 const path = require('path');
 
 const sequelize = new Sequelize(
-   `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}/pokemon`,
+   `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}/pokemonlauti`,
    {
       logging: false,
       native: false,
+      dialectOptions: {
+         ssl: {
+            require: true,
+            rejectUnauthorized: false // Si tu certificado SSL no está firmado por una autoridad de confianza, podrías necesitar establecer esto en false
+         }
+      }
    }
 );
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

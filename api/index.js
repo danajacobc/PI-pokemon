@@ -6,7 +6,7 @@ const port = process.env.POSTGRES_HOST || 3000;
 conn.sync({ force: false })
 .then(() => {
   server.listen(port, () => {
-    console.log('Server levantado en puerto: 3001'); // eslint-disable-line no-console
+    console.log(`Server levantado en puerto: ${port}`); // eslint-disable-line no-console
   });
 })
 .catch((error) => {
