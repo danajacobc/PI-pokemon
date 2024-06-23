@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+    db:
+      image: postgres:latest
+      container_name: pokemonlauti
+      restart: always
+      environment:
+        - POSTGRES_DB=pokemonlauti
+        - POSTGRES_USER=dana
+        - POSTGRES_PASSWORD=brandy123
+      ports:
+        - "5432:5432"
