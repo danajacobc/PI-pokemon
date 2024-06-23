@@ -13,7 +13,7 @@ import axios from "axios";
 
 export const allPoke = (character) => {
   try {
-    const endpoint = "http://localhost:3001/pokemons";
+    const endpoint = "https://pokelauti-back.vercel.app/pokemons";
     return async (dispatch) => {
     const {data} = await axios.get(endpoint, character);
       
@@ -30,7 +30,7 @@ export const allPoke = (character) => {
 export const pokeById = (id, isFromAPI) => {
   try {
     return async (dispatch) => {
-    const {data} = await axios.get(`http://localhost:3001/pokemons/${id}?isFromAPI=${isFromAPI}`);
+    const {data} = await axios.get(`https://pokelauti-back.vercel.app/pokemons/${id}?isFromAPI=${isFromAPI}`);
       
       return dispatch({
       type: "ID_POKE",
@@ -51,7 +51,7 @@ export const resetDetail = () => {
 export const searchPoke = (name) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/pokemons/name?name=${name}`);
+      const { data } = await axios.get(`https://pokelauti-back.vercel.app/pokemons/name?name=${name}`);
       
       return dispatch({
         type: "GET_NAME",
@@ -80,7 +80,7 @@ export const orderAtt = (orden) => {
 export const getTypes = () => {
   try {
     return async (dispatch) => {
-    let types = await axios.get("http://localhost:3001/types");
+    let types = await axios.get("https://pokelauti-back.vercel.app/types");
       
       return dispatch({
       type: "GET_TYPES",
@@ -109,7 +109,7 @@ export const filterTypes = (types) => {
 export const pokeCreate = (payload) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/pokemons", payload);
+      const response = await axios.post("https://pokelauti-back.vercel.app/pokemons", payload);
 
       return dispatch({
         type: "POKE_CREATE", 
