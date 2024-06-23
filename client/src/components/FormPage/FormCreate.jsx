@@ -142,7 +142,7 @@ const FormCreate = () => {
     <div className={styles.container}>
       <div className={styles.containerNav}>
         <div className={styles.crea}>
-          <h1>✏️ Create your</h1>
+          <h1>✏️ Lauti, crea tu</h1>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png"
             width="300px"
@@ -156,7 +156,7 @@ const FormCreate = () => {
         <div className={styles.containerForm}>
           <div >
             <div className={styles.inputContainer}>
-              <label>✨ Name:</label>
+              <label>✨ Nombre:</label>
               <input
                 className={styles.input}
                 type="text"
@@ -173,7 +173,7 @@ const FormCreate = () => {
             
             
             <div className={styles.inputContainer}>
-              <label>📸 Image:</label>
+              <label>📸 Imagen:</label>
               <input
                 className={styles.input}
                 type="url"
@@ -240,7 +240,7 @@ const FormCreate = () => {
             
           <div className={styles.form}>
             <div className={styles.inputContainer}>
-              <label>📏 Height:</label>
+              <label>📏 Altura:</label>
               <input
                 className={styles.input}
                 type="number"
@@ -254,7 +254,7 @@ const FormCreate = () => {
               )}
             </div>
             <div className={styles.inputContainer}>
-              <label>⚖️ Weight:</label>
+              <label>⚖️ Peso:</label>
               <input
                 className={styles.input}
                 type="number"
@@ -324,7 +324,7 @@ const FormCreate = () => {
           {!input.name || !input.hp || !input.attack || !input.defense || input.types.length === 0 ||
           errors.types || errors.name ? null : (
             <button className={styles.button} type="submit" >
-              Create My Pokémon
+              Crear Mi Pokémon
             </button>
           )}
       </form>

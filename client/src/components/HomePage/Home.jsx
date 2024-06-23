@@ -206,7 +206,7 @@ const Home = () => {
             //   />
             // </div>
             <div className={styles.loading}>
-            <h2>Loading...</h2>
+            <h2>Cargando...</h2>
             <img
              src="https://media.tenor.com/4K2_dLLq-pwAAAAi/charmander-chases-tail.gif"
              alt="loading"

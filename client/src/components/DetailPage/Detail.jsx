@@ -57,9 +57,9 @@ const Detail = () => {
           <h2>⚔️ Attack: {poke.attack}</h2>
           <h2>🛡️ Defense: {poke.defense}</h2>
           <h2>⚡Speed: {poke.speed}</h2>
-          <h2>📏 Height: {poke.height}</h2>
-          <h2>⚖️ Weight: {poke.weight}</h2>
-          <h2>Types: </h2>
+          <h2>📏 Altura: {poke.height}</h2>
+          <h2>⚖️ Peso: {poke.weight}</h2>
+          <h2>Tipo de pokémon: </h2>
           <div className={styles.types}>
             {poke.types &&
               Array.isArray(poke.types) &&
