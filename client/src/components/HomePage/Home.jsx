@@ -100,7 +100,7 @@ const Home = () => {
           <div className={styles.menuContainer}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png" width="150px"/>
             <div className={styles.filterContainer}>
-              <h4>Filter 🔍</h4>
+              <h4>Filtros 🔍</h4>
               <div className={styles.filter}>
               <h5>Origin</h5>
               <select
@@ -110,11 +110,11 @@ const Home = () => {
                 onChange={(e) => handleFilterOrigin(e)}
                 defaultValue="all"
               >
-                <option value="all">All</option>
-                <option value="A">API</option>
-                <option value="DB">DataBase</option>
+                <option value="all">Todos</option>
+                <option value="A">Pokemons</option>
+                <option value="DB">Mis Pokes</option>
               </select>
-              <h5>Types</h5>
+              <h5>Tipos</h5>
               <select
                 className={styles.button}
                 name="filterType"
@@ -134,7 +134,7 @@ const Home = () => {
               </div>
             </div>
             <div className={styles.orderContainer}>
-              <h4>Order 🔍</h4>
+              <h4>Ordenar 🔍</h4>
               <select
                 className={styles.button}
                 name="orderAlf"
@@ -142,9 +142,9 @@ const Home = () => {
                 onChange={(e) => handleOrderAlf(e)}
                 defaultValue="default"
               >
-                <option value="default">Alphabetically</option>
-                <option value="A">Ascendent</option>
-                <option value="D">Descendent</option>
+                <option value="default">Por nombre</option>
+                <option value="A">A-Z</option>
+                <option value="D">Z-A</option>
               </select>
 
               <select
@@ -155,8 +155,8 @@ const Home = () => {
                 defaultValue="default"
               >
                 <option value="default">Attack</option>
-                <option value="A">Min to Max</option>
-                <option value="D">Max to Min</option>
+                <option value="A">Min - Max</option>
+                <option value="D">Max - Min</option>
               </select>
             </div>
           </div>
@@ -176,12 +176,12 @@ const Home = () => {
         <SearchBar setCurrentPage={setCurrentPage} />
         {/* {pokeByName && <Card key={pokeByName.id} poke={pokeByName} />} */}
 
-        <button className={styles.button} onClick={handleClick}>Refresh</button>
+        <button className={styles.button} onClick={handleClick}>Refrescar</button>
         <Link to="/create">
-          <button className={styles.button}> Create </button>
+          <button className={styles.button}> Crear </button>
         </Link>
         <Link to="/">
-          <button className={styles.button}> Leave </button>
+          <button className={styles.button}> Salir </button>
         </Link>
       </div>
       <div className={styles.displayContainer}>
